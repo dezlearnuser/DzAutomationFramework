@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+}
+
+apply from: 'dependencies.gradle'
+apply plugin: 'maven-publish'
+
+group = 'com.dz'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation('junit:junit:' + libraryVersions.junit)
+    implementation('io.cucumber:cucumber-java:' + libraryVersions.cucumber_java)
+    implementation('io.cucumber:cucumber-spring:' + libraryVersions.cucumber_spring)
+//    implementation('io.cucumber:cucumber-junit:' + libraryVersions.cucumber_junit)
+    implementation 'io.cucumber:cucumber-testng:' + libraryVersions.cucumberTestng
+    implementation('io.rest-assured:rest-assured:' + libraryVersions.restAssured)
+    implementation('io.swagger:swagger-jersey-jaxrs:' + libraryVersions.swaggerJerseyJaxrs)
+    implementation('org.jsoup:jsoup:' + libraryVersions.jsoup)
+    implementation('org.springframework:spring-test:' + libraryVersions.spring_test)
+    implementation('org.springframework:spring-context:' + libraryVersions.spring_context)
+    implementation('org.seleniumhq.selenium:selenium-java:' + libraryVersions.selenium_java)
+    implementation('org.apache.commons:commons-lang3:' + libraryVersions.commons_lang3)
+    implementation('org.slf4j:slf4j-api:' + libraryVersions.slf4j_api)
+    implementation('org.apache.logging.log4j:log4j-slf4j-impl:' + libraryVersions.log4j_slf4j_impl)
+    implementation 'org.projectlombok:lombok:'+ libraryVersions.lombok
+    implementation('com.google.guava:guava:' + libraryVersions.guava)
+    implementation('com.google.code.gson:gson:' + libraryVersions.gson)
+    implementation 'com.netflix.archaius:archaius-core:0.7.6'
+    implementation 'com.aventstack:extentreports:5.0.9'
+}
+
+test {
+    testLogging {
+        useJUnit()
+        exceptionFormat = 'full'
+        afterSuite { desc, result ->
+            if (desc.className && result.testCount != 0) { // will match the outermost suite
+                println "\n Test Suite: " + desc.className
+                println "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)\n"
+            }
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifactId = 'framework'
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}

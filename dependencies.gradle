@@ -1,0 +1,22 @@
+ext {
+    libraryVersions = [
+            junit             : '4.13',
+            cucumber_java     : '7.8.1',
+            cucumber_spring   : '7.8.1',
+            spring_test       : '5.3.23',
+            spring_context    : '5.3.18',
+            cucumber_junit    : '7.8.1',
+            java_client       : '8.2.0',
+            selenium_java     : '4.5.0',
+            guava             : '31.1-jre',
+            gson              : '2.9.1',
+            commons_lang3     : '3.7',
+            slf4j_api         : '1.7.30',
+            log4j_slf4j_impl  : '2.18.0',
+            restAssured       : '5.3.0',
+            swaggerJerseyJaxrs: '1.5.21',
+            jsoup             : '1.15.3',
+            cucumberTestng    : '7.15.0',
+            lombok            : '1.18.30'
+    ]
+}
